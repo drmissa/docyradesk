@@ -1,0 +1,20 @@
+name: DocyraDesk build
+
+# Manual only — no push/PR trigger, so no fork can kick off a build on our runners.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docyradesk-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    uses: ./.github/workflows/flutter-build.yml
+    with:
+      upload-artifact: true
+      upload-tag: "docyradesk"
+      publish-update-metadata: false
