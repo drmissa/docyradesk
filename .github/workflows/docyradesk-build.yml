@@ -5,7 +5,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  # Upstream flutter-build.yml has two jobs that request contents: write
+  # (sbom, publish-signed-update-metadata). GitHub validates this statically,
+  # so read-only here makes the whole reusable workflow refuse to start.
+  # Safe because this workflow is workflow_dispatch-only: no fork or PR can run it.
+  contents: write
 
 concurrency:
   group: docyradesk-build
