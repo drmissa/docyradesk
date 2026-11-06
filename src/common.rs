@@ -121,11 +121,12 @@ impl Drop for SimpleCallOnReturn {
 }
 
 pub fn global_init() -> bool {
+    *hbb_common::config::APP_NAME.write().unwrap() = "DocyraDesk".to_owned();
     {
         let mut defs = config::DEFAULT_SETTINGS.write().unwrap();
         defs.entry("custom-rendezvous-server".to_string()).or_insert_with(|| "38.242.249.73".to_string());
         defs.entry("relay-server".to_string()).or_insert_with(|| "38.242.249.73:21117".to_string());
-        defs.entry("key".to_string()).or_insert_with(|| "6ojDwGMBaXQz02+ymvQDQjV3cCTBEcn5lS4LfSBgHRQ=".to_string());
+        defs.entry("key".to_string()).or_insert_with(|| "Te4QpUikUOH5D6mXSAXUMg3AYkWgJWPx5T82LALUvbA=".to_string());
     }
     #[cfg(all(target_os = "linux", feature = "drm"))]
     crate::platform::linux::dispatch_wayland_display_probe();
